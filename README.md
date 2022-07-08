@@ -1,4 +1,4 @@
-# RegistrationAPI
+# CQRSMediatrAPI
 
 
 <p>API RESTful feita para aplicar princípios e práticas de <i>CQRS</i> e <i>MediatR</i></p>
