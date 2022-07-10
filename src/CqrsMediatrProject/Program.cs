@@ -14,8 +14,8 @@ builder.Services.AddMediatR(typeof(Program));
 builder.Services.Configure<CustomerDatabaseSettings>
     (builder.Configuration.GetSection("DevNetStoreDatabase"));
 
-//Troca o tipo de injeção de dependencia
-builder.Services.AddSingleton<CustomerService>();
+
+builder.Services.AddScoped<CustomerService>();
 
 
 
