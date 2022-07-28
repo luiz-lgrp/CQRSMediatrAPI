@@ -16,7 +16,7 @@ namespace CqrsMediatrProject.Controllers
         public CustomersController(ISender sender) => _sender = sender;
 
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<ActionResult> GetAll()
         {
             var customers = await _sender.Send(new GetCustomersQuery());
@@ -24,8 +24,9 @@ namespace CqrsMediatrProject.Controllers
             return Ok(customers);
         }
 
-        [HttpGet("{cpf}", Name = "GetByCpf")]
-        public async Task<ActionResult> GetByCpf(string cpf)
+        [HttpGet("GetByCpf")]
+        public async Task<ActionResult> GetByCpf
+            ([FromQuery]string cpf)
         {
             var customer = await _sender.Send(new GetCustomerCpfQuerys(cpf));
 
@@ -37,16 +38,21 @@ namespace CqrsMediatrProject.Controllers
             return Ok(customer);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> CreateCustomer([FromBody]Customer newCustomer)
+        [HttpPost("InsertCustomer")]
+        public async Task<ActionResult> CreateCustomer
+            ([FromBody] Customer newCustomer)
         {
             var customerToReturn = await _sender.Send(new AddCustomersCommand(newCustomer));
 
-            return CreatedAtRoute("GetByCpf", new { cpf = customerToReturn.Cpf }, customerToReturn);
+            return Ok(customerToReturn);
+            
         }
 
-        [HttpPut("{cpf}")]
-        public async Task<ActionResult> UpdateCustomer(string cpf, Customer updatedCustomer)
+
+        [HttpPut("UpdateCustomer")]
+        public async Task<ActionResult> UpdateCustomer
+            ([FromQuery] string cpf,
+            [FromBody] Customer updatedCustomer)
         {
             var customer = await _sender.Send(new GetCustomerCpfQuerys(cpf));
 
@@ -62,8 +68,8 @@ namespace CqrsMediatrProject.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{cpf}")]
-        public async Task<ActionResult> DeleteCustomer(string cpf)
+        [HttpDelete("DeleteCustomer")]
+        public async Task<ActionResult> DeleteCustomer([FromQuery] string cpf)
         {
             var customer = await _sender.Send(new GetCustomerCpfQuerys(cpf));
 
