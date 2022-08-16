@@ -10,12 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMediatR(typeof(Program));
 
 
-// configurando para pegar a string de conex„o e demais dados
+// configurando para pegar a string de conex√£o e demais dados
 builder.Services.Configure<CustomerDatabaseSettings>
     (builder.Configuration.GetSection("DevNetStoreDatabase"));
 
 
-builder.Services.AddScoped<CustomerService>();
+builder.Services.AddSingleton<CustomerService>();
 
 
 
