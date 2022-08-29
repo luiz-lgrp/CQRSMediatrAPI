@@ -1,7 +1,7 @@
 # CQRSMediatrAPI
 
 
-<p>API RESTful feita para aplicar princípios e práticas de <i>CQRS</i> e <i>Mediator</i></p>
+<p>API REST feita para aplicar princípios e práticas de <i>CQRS</i> e <i>Mediator</i></p>
 <br>
 <p>Para fazer as validações usei a biblioteca <i>FluentValidation</i> </p>
 <br>
